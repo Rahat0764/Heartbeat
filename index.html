@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>💗 I Coded This Heartbeat For You</title>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fira+Code:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
@@ -376,7 +375,6 @@
 </head>
 <body>
     
-    <!-- Background Audio File: Replace 'your-audio-file.mp3' with your song file name -->
     <audio id="bgMusic" src="song.mp3" loop></audio>
 
     <div class="start-overlay" id="startOverlay">
@@ -446,7 +444,7 @@
             const ROTATION_SPEED_Y = 0.012;
 
             const WORDS = [
-                'kitty', 'lamu', '❤', 'love', 'boujaan', 'my heart',
+                'kitty', 'lamu', 'kolija', '❤', 'love', 'boujaan', 'my heart',
                 'forever', 'always', 'you', 'me & you', 'love you', 'sweetheart'
             ];
 
@@ -508,12 +506,9 @@
             }
 
             setTimeout(startCardLoader, 400);
-
-            // Button Click Event - Starts Audio and Animation
-            document.getElementById('startBtn').addEventListener('click', () => {
+ document.getElementById('startBtn').addEventListener('click', () => {
                 playClickSound();
                 
-                // Play Background Music
                 const bgMusic = document.getElementById('bgMusic');
                 bgMusic.play().catch(error => {
                     console.log("Audio play prevented by browser:", error);
@@ -528,8 +523,8 @@
 
             let isLetterOpen = false;
             let isLetterTyping = false;
-            // Changed recipient name to Kitty
-            const letterText = "Dear Kitty,\n\nI coded this heartbeat for you...\n\nEvery line of code, every pixel, and every beat is a reminder of how much you mean to me.\n\nNo matter where life takes us, my heart will always run in an infinite loop for you, beating forever 💗.";
+
+            const letterText = "Dear Boujaan,\n\nI coded this heartbeat for you...\n\nEvery line of code, every pixel, and every beat is a reminder of how much you mean to me.\n\nNo matter where life takes us, my heart will always run in an infinite loop for you, beating forever 💗.";
 
             function openLetter() {
                 if (isLetterOpen) return;
