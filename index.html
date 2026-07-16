@@ -45,54 +45,6 @@
             pointer-events: none;
         }
 
-        .msg {
-            position: fixed;
-            bottom: 55px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            text-align: center;
-            pointer-events: none;
-            width: 100%;
-        }
-
-        .m1 {
-            font-size: 15px;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .m2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 1s ease 0.4s, transform 1s ease 0.4s;
-            text-shadow: 0 0 15px rgba(255, 45, 85, 0.4);
-        }
-
-        .m2 span {
-            background: linear-gradient(135deg, #ff2d55, #ff6b9d, #c471f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 42px;
-        }
-
-        .msg.active .m1,
-        .msg.active .m2 {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* --- Start Overlay --- */
         .start-overlay {
             position: fixed;
@@ -219,7 +171,7 @@
             padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            transition: opacity 0.8s ease, visibility 0.8s;
             backdrop-filter: blur(8px);
         }
 
@@ -235,23 +187,21 @@
             border: 1px solid rgba(255, 45, 85, 0.25);
             border-radius: 20px;
             padding: 35px 28px 30px;
-            transform: translateY(20px) scale(0.95);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px) scale(0.95);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
         }
 
         .letter-overlay.active .letter-card {
             transform: translateY(0) scale(1);
+            opacity: 1;
         }
 
-        .letter-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 28px;
-            cursor: pointer;
+        /* For elegant fade out when reading finishes */
+        .letter-overlay .letter-card.fade-out {
+            transform: translateY(-50px) scale(0.95);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .letter-header {
@@ -281,20 +231,26 @@
             text-align: right;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 15px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .letter-sign.visible {
+            opacity: 1;
         }
 
         /* --- Photo Overlay (Heart Mask) --- */
         .photo-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 0, 5, 0.85);
             z-index: 160;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease, visibility 1s;
+            transition: opacity 0.3s ease, visibility 0.3s;
+            pointer-events: none;
         }
 
         .photo-overlay.active {
@@ -306,7 +262,7 @@
             width: min(85vw, 350px);
             height: min(85vw, 350px);
             background: rgba(255, 45, 85, 0.1);
-            /* Perfect SVG Heart Mask for the image */
+            /* Perfect SVG Heart Mask */
             -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
             mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
             -webkit-mask-size: contain;
@@ -315,12 +271,13 @@
             mask-repeat: no-repeat;
             -webkit-mask-position: center;
             mask-position: center;
-            transform: scale(0.8);
-            transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1);
+            transform: scale(0); /* Pop animation start */
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 50px rgba(255, 45, 85, 0.5);
         }
 
         .photo-overlay.active .heart-photo-frame {
-            transform: scale(1);
+            transform: scale(1); /* Pop animation end */
         }
 
         .heart-photo-frame img {
@@ -341,15 +298,15 @@
         .curtain {
             width: 50%;
             height: 100%;
-            background: #020005; /* Deep cinematic black */
-            transition: transform 1.8s cubic-bezier(0.64, 0, 0.78, 0);
+            background: #020005;
+            transition: transform 1.5s cubic-bezier(0.64, 0, 0.78, 0);
         }
 
         .curtain.left { transform: translateX(-100%); border-right: 1px solid rgba(255, 45, 85, 0.2); }
         .curtain.right { transform: translateX(100%); border-left: 1px solid rgba(255, 45, 85, 0.2); }
 
         .curtain-container.active .curtain { transform: translateX(0); }
-        .curtain-container.active { pointer-events: auto; }
+        .curtain-container.active { pointer-events: auto; cursor: pointer; }
 
         .restart-content {
             position: absolute;
@@ -359,18 +316,17 @@
             text-align: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease 0.5s;
-            cursor: pointer;
+            transition: opacity 1s ease 0.8s; /* Delayed appearance after curtain closes */
         }
 
-        .restart-content.active {
+        .curtain-container.active .restart-content {
             opacity: 1;
             visibility: visible;
         }
 
         .restart-content h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 52px;
+            font-size: 58px;
             color: #ff2d55;
             margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(255, 45, 85, 0.4);
@@ -410,13 +366,12 @@
 
     <canvas id="c"></canvas>
 
-    <!-- Letter -->
+    <!-- Letter Overlay -->
     <div class="letter-overlay" id="letterOverlay">
-        <div class="letter-card">
-            <button class="letter-close" id="letterClose">&times;</button>
+        <div class="letter-card" id="letterCard">
             <div class="letter-header">for you</div>
             <div class="letter-body" id="letterBody"></div>
-            <div class="letter-sign">Yours forever, Rahat</div>
+            <div class="letter-sign" id="letterSign">Yours forever, Rahat</div>
         </div>
     </div>
 
@@ -428,18 +383,13 @@
     </div>
 
     <!-- Curtains & Reload -->
-    <div class="curtain-container" id="curtainContainer">
+    <div class="curtain-container" id="curtainContainer" onclick="location.reload()">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
-        <div class="restart-content" id="restartContent" onclick="location.reload()">
+        <div class="restart-content" id="restartContent">
             <h2>I Love You</h2>
             <p>tap here to reload</p>
         </div>
-    </div>
-
-    <div class="msg" id="msg">
-        <p class="m1">My heart beats only</p>
-        <p class="m2">for <span>Kitty</span> 💗</p>
     </div>
 
     <script>
@@ -473,8 +423,7 @@
             resize();
 
             const NUM_POINTS = 180;
-            // Sped down rotation for a softer look
-            const ROTATION_SPEED_Y = 0.008;
+            let currentRotSpeed = 0.006; // Soft rotation speed
 
             const WORDS = [
                 'kitty', 'lamu', 'kolija', '❤', 'love', 'boujaan', 'my heart',
@@ -483,7 +432,13 @@
 
             let startTimestamp = null;
             let isIntroFinished = false;
+            
+            // Flow Control Flags
+            let isLetterTriggered = false;
+            let isDramaticSpin = false;
+            let isPhotoRevealed = false;
 
+            // Loader function
             function startCardLoader() {
                 const loadingBar = document.getElementById('loadingBar');
                 const statusText = document.getElementById('statusText');
@@ -498,7 +453,6 @@
                 ];
 
                 let loaderStart = null;
-
                 function animateLoader(timestamp) {
                     if (!loaderStart) loaderStart = timestamp;
                     const progress = Math.min((timestamp - loaderStart) / duration, 1);
@@ -516,9 +470,9 @@
                 }
                 requestAnimationFrame(animateLoader);
             }
-
             setTimeout(startCardLoader, 400);
 
+            // Start button listener
             document.getElementById('startBtn').addEventListener('click', () => {
                 const bgMusic = document.getElementById('bgMusic');
                 bgMusic.play().catch(e => console.log(e));
@@ -530,29 +484,19 @@
                 }, 800);
             });
 
-            let isLetterOpen = false;
-            let isLetterTyping = false;
+            // Cinematic Letter Logic
+            const letterText = "Dear Boujaan,\n\nI made this just for you...\n\nEvery single beat you see here is a reminder of how much you mean to me, and how deeply I have fallen for you.\n\nNo matter where life takes us, my heart will always beat only for you, today and forever 💗.";
 
-            const letterText = "Dear Boujaan,\n\nI made this just for you...\n\nEvery single beat you see here is a reminder of how much you mean to me, and how deeply I have fallen for you.\n\nNo matter where life takes us, my heart will always beat only for you, today, tomorrow, always and forever 💗.";
-
-            function openLetter() {
-                if (isLetterOpen) return;
-                isLetterOpen = true;
+            function startLetterSequence() {
+                isLetterTriggered = true;
                 const overlay = document.getElementById('letterOverlay');
                 overlay.classList.add('active');
 
                 const body = document.getElementById('letterBody');
                 body.innerHTML = '';
 
-                if (isLetterTyping) return;
-                isLetterTyping = true;
-
                 let charIdx = 0;
                 function typeChar() {
-                    if (!isLetterOpen) {
-                        isLetterTyping = false;
-                        return;
-                    }
                     if (charIdx < letterText.length) {
                         const char = letterText[charIdx];
                         if (char === '\n') {
@@ -563,40 +507,51 @@
                         charIdx++;
                         setTimeout(typeChar, 40);
                     } else {
-                        isLetterTyping = false;
+                        // Finished typing! Show signature
+                        document.getElementById('letterSign').classList.add('visible');
+                        
+                        // Wait 3.5 seconds to let them read, then elegantly fade away
+                        setTimeout(endLetterSequence, 3500);
                     }
                 }
-                setTimeout(typeChar, 500);
+                setTimeout(typeChar, 600); // Slight delay after popup before typing
             }
 
-            function closeLetter() {
-                isLetterOpen = false;
-                document.getElementById('letterOverlay').classList.remove('active');
-
-                // Sequence: Photo -> Curtain -> Reload Button
+            function endLetterSequence() {
+                const card = document.getElementById('letterCard');
+                // Elegant fade out CSS class
+                card.classList.add('fade-out');
+                
                 setTimeout(() => {
+                    document.getElementById('letterOverlay').classList.remove('active');
+                    // Initiate Heart Spin & Photo Reveal
+                    initiatePhotoSequence();
+                }, 800); // wait for fade out
+            }
+
+            function initiatePhotoSequence() {
+                // Dramatically spin the heart for 1.2 seconds
+                isDramaticSpin = true;
+                currentRotSpeed = 0.08; // Super fast spin
+
+                setTimeout(() => {
+                    isDramaticSpin = false;
+                    isPhotoRevealed = true; // Signals particles to explode outwards
+                    
+                    // Show the heart-shaped photo
                     const photoOverlay = document.getElementById('photoOverlay');
                     photoOverlay.classList.add('active');
 
-                    // Show photo for 5 seconds
+                    // Keep photo for exactly 2 seconds, then close curtains
                     setTimeout(() => {
-                        // Close curtains
                         const curtain = document.getElementById('curtainContainer');
                         curtain.classList.add('active');
+                    }, 2000);
 
-                        // After curtain closes, show text
-                        setTimeout(() => {
-                            photoOverlay.classList.remove('active'); // hide behind curtain
-                            document.getElementById('restartContent').classList.add('active');
-                        }, 1800);
-
-                    }, 5000);
-
-                }, 800);
+                }, 1200);
             }
 
-            document.getElementById('letterClose').addEventListener('click', closeLetter);
-
+            // 3D Math & Particle System
             function getHeartPoint(t, layer) {
                 const x = Math.pow(Math.sin(t), 3);
                 const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / 16;
@@ -645,12 +600,15 @@
                     const spanX = W / scale;
                     const spanY = H / scale;
 
-                    // Word rain starting positions (spread out)
-                    this.rainX = (Math.random() - 0.5) * spanX * 1.5;
-                    this.rainY = -spanY * 0.8 - Math.random() * spanY * 1.5;
-                    this.rainZ = (Math.random() - 0.5) * 0.8;
+                    // Wide elegant rain start positions
+                    this.rainX = (Math.random() - 0.5) * spanX * 2.0;
+                    this.rainY = -spanY * 1.0 - Math.random() * spanY * 1.5;
+                    this.rainZ = (Math.random() - 0.5) * 1.5;
 
-                    this.speedY = Math.random() * 0.02 + 0.02;
+                    // Slow drift
+                    this.speedY = Math.random() * 0.015 + 0.01;
+                    this.driftOffset = Math.random() * Math.PI * 2;
+                    this.driftSpeed = Math.random() * 1.5 + 0.5;
 
                     const theta = (index / NUM_POINTS) * Math.PI * 2 * 7;
                     const layer = (index / NUM_POINTS) * 2 - 1;
@@ -665,9 +623,10 @@
                     this.z = this.rainZ;
 
                     this.trail = [];
-                    this.maxTrail = 5;
+                    this.maxTrail = 6; // slightly longer trail for rain
 
-                    this.assembleDelay = Math.random() * 0.5;
+                    // Smooth random delay for assemble
+                    this.assembleDelay = Math.random() * 0.6;
                     this.fontSize = Math.random() < 0.25 ? 15 : (Math.random() < 0.7 ? 12 : 10);
                     this.weight = '600';
                     this.opacity = Math.random() * 0.4 + 0.6;
@@ -677,15 +636,31 @@
                 update(phase, progress, rotY, rotX, beatFactor, time) {
                     const spanY = H / scale;
 
-                    if (phase === 'rain') {
+                    if (isPhotoRevealed) {
+                        // Explode words outward and fade them
+                        this.targetX *= 1.08;
+                        this.targetY *= 1.08;
+                        this.targetZ *= 1.08;
+                        this.opacity *= 0.85; // Quick fade
+                        
+                        this.x = this.targetX;
+                        this.y = this.targetY;
+                        this.z = this.targetZ;
+
+                    } else if (phase === 'rain') {
                         this.rainY += this.speedY;
-                        if (this.rainY > spanY * 0.6) {
+                        // Elegant horizontal swaying
+                        const sway = Math.sin(time * this.driftSpeed + this.driftOffset) * 0.01;
+                        this.rainX += sway;
+
+                        if (this.rainY > spanY * 0.7) {
                             this.rainY = -spanY * 0.8;
-                            this.rainX = (Math.random() - 0.5) * (W / scale) * 1.5;
+                            this.rainX = (Math.random() - 0.5) * spanX * 2.0;
                         }
                         this.x = this.rainX;
                         this.y = this.rainY;
                         this.z = this.rainZ;
+
                     } else if (phase === 'assemble') {
                         const adjProgress = Math.max(0, Math.min(1, (progress - this.assembleDelay) / (1 - this.assembleDelay)));
                         const t = easeInOutCubic(adjProgress);
@@ -694,8 +669,8 @@
                         this.y = lerp(this.rainY, this.targetY * beatFactor, t);
                         this.z = lerp(this.rainZ, this.targetZ * beatFactor, t);
                     } else if (phase === 'beating') {
-                        // Slower beating wave
-                        const wave = Math.sin(time * 1.5 + this.noiseOffset) * 0.015;
+                        // Very slow romantic beating wave
+                        const wave = Math.sin(time * 1.5 + this.noiseOffset) * 0.012;
                         this.x = (this.targetX + wave) * beatFactor;
                         this.y = (this.targetY + wave) * beatFactor;
                         this.z = (this.targetZ + wave) * beatFactor;
@@ -703,7 +678,8 @@
 
                     project3D(this, rotY, rotX);
 
-                    if (phase !== 'beating') {
+                    // Add trail only if not beating and not exploded
+                    if (phase !== 'beating' && !isPhotoRevealed) {
                         this.trail.push({ x: this.projX, y: this.projY });
                         if (this.trail.length > this.maxTrail) this.trail.shift();
                     } else {
@@ -720,57 +696,10 @@
             let rotY = 0;
             let rotX = 0.2;
 
-            // Increased times so word rain and assemble is clearly visible
+            // Timings for visual phases
             const RAIN_DURATION = 4500; 
             const ASSEMBLE_DURATION = 3500;
-
-            let isDragging = false;
-            let startX = 0, startY = 0, baseRotY = 0, baseRotX = 0.2;
-
-            function handleStart(e) {
-                if (!isIntroFinished) return;
-                isDragging = true;
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                startX = clientX; startY = clientY;
-                baseRotY = rotY; baseRotX = rotX;
-            }
-
-            function handleMove(e) {
-                if (!isDragging) return;
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                rotY = baseRotY + (clientX - startX) * 0.007;
-                rotX = Math.max(-0.6, Math.min(0.8, baseRotX + (clientY - startY) * 0.007));
-            }
-
-            function handleEnd(e) {
-                isDragging = false;
-                let clientX = startX, clientY = startY;
-                if (e.changedTouches && e.changedTouches.length > 0) {
-                    clientX = e.changedTouches[0].clientX; clientY = e.changedTouches[0].clientY;
-                } else if (e.clientX !== undefined) {
-                    clientX = e.clientX; clientY = e.clientY;
-                }
-
-                const dist = Math.hypot(clientX - startX, clientY - startY);
-                if (dist < 6 && isIntroFinished) {
-                    const elapsed = performance.now() - startTimestamp;
-                    if (elapsed > RAIN_DURATION + ASSEMBLE_DURATION) {
-                        const overlay = document.getElementById('letterOverlay');
-                        if (!overlay.classList.contains('active')) {
-                            openLetter();
-                        }
-                    }
-                }
-            }
-
-            window.addEventListener('mousedown', handleStart);
-            window.addEventListener('mousemove', handleMove);
-            window.addEventListener('mouseup', handleEnd);
-            window.addEventListener('touchstart', handleStart);
-            window.addEventListener('touchmove', handleMove);
-            window.addEventListener('touchend', handleEnd);
+            const BEAT_BEFORE_LETTER = 3000; // Heart beats for 3 sec before auto-opening letter
 
             function loop(now) {
                 if (!isIntroFinished) {
@@ -794,26 +723,35 @@
                 } else {
                     phase = 'beating';
                     progress = 1.0;
-                }
 
-                let beatFactor = 1.0;
-                if (phase === 'beating') {
-                    // Slower heartbeat cycle
-                    const beatCycle = 2000;
-                    const cycleProgress = (elapsed - (RAIN_DURATION + ASSEMBLE_DURATION)) % beatCycle;
-
-                    if (cycleProgress < 160) {
-                        const t = cycleProgress / 160;
-                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.12;
-                    } else if (cycleProgress >= 300 && cycleProgress < 460) {
-                        const t = (cycleProgress - 300) / 160;
-                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.08;
+                    // Trigger letter automatically after 3s of beating
+                    if (!isLetterTriggered && elapsed > (RAIN_DURATION + ASSEMBLE_DURATION + BEAT_BEFORE_LETTER)) {
+                        startLetterSequence();
                     }
                 }
 
-                if (!isDragging) {
-                    rotY += ROTATION_SPEED_Y;
-                    rotX = 0.25 + Math.sin(time * 0.6) * 0.08;
+                let beatFactor = 1.0;
+                // Only beat normally if we are not spinning or revealing photo
+                if (phase === 'beating' && !isDramaticSpin && !isPhotoRevealed) {
+                    const beatCycle = 1800; // soft and slow beat
+                    const cycleProgress = (elapsed - (RAIN_DURATION + ASSEMBLE_DURATION)) % beatCycle;
+
+                    if (cycleProgress < 150) {
+                        const t = cycleProgress / 150;
+                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.1;
+                    } else if (cycleProgress >= 280 && cycleProgress < 430) {
+                        const t = (cycleProgress - 280) / 150;
+                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.07;
+                    }
+                } else if (isDramaticSpin) {
+                    beatFactor = 1.1; // Slightly enlarge heart while spinning
+                }
+
+                // Update rotations
+                rotY += currentRotSpeed; 
+                // Gentle tilt if not spinning fast
+                if(!isDramaticSpin) {
+                    rotX = 0.25 + Math.sin(time * 0.5) * 0.08; 
                 }
 
                 for (let i = 0; i < NUM_POINTS; i++) {
@@ -826,27 +764,34 @@
 
                 for (let i = 0; i < NUM_POINTS; i++) {
                     const p = heartParticles[i];
+                    if(p.opacity <= 0.01) continue; // Skip rendering if faded out completely
+
                     const zNorm = (p.projZ + 0.8) / 1.6;
 
-                    if (phase === 'beating' && zNorm > 0.55) continue;
+                    // Hide back particles slightly during normal beating for depth
+                    if (phase === 'beating' && zNorm > 0.6 && !isDramaticSpin) continue;
 
-                    // Draw Trails
-                    if (phase !== 'beating' && p.trail.length > 1) {
+                    // Draw Trails (mostly during rain)
+                    if (phase !== 'beating' && p.trail.length > 1 && !isPhotoRevealed) {
                         for (let j = 0; j < p.trail.length - 1; j++) {
                             const trailPos = p.trail[j];
-                            const trailAlpha = (p.opacity * (j / p.trail.length) * 0.3).toFixed(2);
+                            const trailAlpha = (p.opacity * (j / p.trail.length) * 0.35).toFixed(2);
                             ctx.font = `${p.weight} ${Math.max(5, Math.round(p.fontSize * 0.7 * p.projScale))}px 'Plus Jakarta Sans', sans-serif`;
-                            ctx.fillStyle = `rgba(255, 45, 85, ${trailAlpha})`;
+                            // Softer trail colors for rain
+                            ctx.fillStyle = phase === 'rain' ? `rgba(255, 107, 157, ${trailAlpha})` : `rgba(255, 45, 85, ${trailAlpha})`;
                             ctx.fillText(p.text, trailPos.x, trailPos.y);
                         }
                     }
 
-                    // Main Word
+                    // Draw Main Word
                     const fSize = Math.max(7, Math.round(p.fontSize * p.projScale));
                     ctx.font = `${p.weight} ${fSize}px 'Plus Jakarta Sans', sans-serif`;
 
                     let r = 255, g = 45, b = 85;
-                    if (phase !== 'rain') {
+                    if (phase === 'rain') {
+                        // Softer pink/whiteish for rain petals
+                        g = 120; b = 170;
+                    } else {
                         if (zNorm < 0.5) {
                             const t = zNorm * 2;
                             g = Math.round(45 + t * 45); b = Math.round(85 + t * 45);
@@ -857,14 +802,10 @@
                     }
 
                     let alpha = p.opacity * Math.max(0.2, (1.2 - zNorm));
-                    if (phase === 'beating' && zNorm > 0.45) alpha *= (0.55 - zNorm) / 0.1;
+                    if (phase === 'beating' && zNorm > 0.45 && !isDramaticSpin) alpha *= (0.55 - zNorm) / 0.1;
 
                     ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
                     ctx.fillText(p.text, p.projX, p.projY);
-                }
-
-                if (elapsed > RAIN_DURATION + 1500) {
-                    document.getElementById('msg').classList.add('active');
                 }
 
                 requestAnimationFrame(loop);
