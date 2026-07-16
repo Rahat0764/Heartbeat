@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>💗 My Heart Beats For You</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -40,7 +40,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, transparent 30%, rgba(2, 0, 5, 0.9) 100%);
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(2, 0, 5, 0.95) 100%);
             z-index: 2;
             pointer-events: none;
         }
@@ -52,7 +52,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 0, 5, 0.96);
+            background: rgba(2, 0, 5, 0.98);
             z-index: 200;
             display: flex;
             align-items: center;
@@ -125,7 +125,7 @@
             font-size: 13px;
             color: #b5a2b0;
             font-style: italic;
-            font-weight: 300;
+            font-weight: 400;
             margin-bottom: 26px;
         }
 
@@ -137,6 +137,7 @@
             border: none;
             border-radius: 12px;
             color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 1.5px;
@@ -163,7 +164,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 0, 5, 0.7);
+            background: rgba(2, 0, 5, 0.6);
             z-index: 150;
             display: flex;
             align-items: center;
@@ -172,7 +173,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.8s ease, visibility 0.8s;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
 
         .letter-overlay.active {
@@ -183,13 +184,14 @@
         .letter-card {
             position: relative;
             width: min(90vw, 360px);
-            background: rgba(20, 10, 25, 0.85);
-            border: 1px solid rgba(255, 45, 85, 0.25);
+            background: rgba(20, 10, 25, 0.9);
+            border: 1px solid rgba(255, 45, 85, 0.3);
             border-radius: 20px;
             padding: 35px 28px 30px;
-            transform: translateY(30px) scale(0.95);
+            transform: translateY(40px) scale(0.95);
             opacity: 0;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(255, 45, 85, 0.15);
         }
 
         .letter-overlay.active .letter-card {
@@ -197,9 +199,9 @@
             opacity: 1;
         }
 
-        /* For elegant fade out when reading finishes */
+        /* Elegant Exit Animation */
         .letter-overlay .letter-card.fade-out {
-            transform: translateY(-50px) scale(0.95);
+            transform: translateY(-60px) scale(0.95);
             opacity: 0;
             pointer-events: none;
         }
@@ -218,15 +220,16 @@
         .letter-body {
             font-size: 15px;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.9);
+            color: #fff;
             min-height: 100px;
             margin-bottom: 24px;
             white-space: pre-line;
+            font-weight: 400;
         }
 
         .letter-sign {
             font-family: 'Dancing Script', cursive;
-            font-size: 22px;
+            font-size: 24px;
             color: #ff6b9d;
             text-align: right;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -237,53 +240,6 @@
 
         .letter-sign.visible {
             opacity: 1;
-        }
-
-        /* --- Photo Overlay (Heart Mask) --- */
-        .photo-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 160;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s;
-            pointer-events: none;
-        }
-
-        .photo-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .heart-photo-frame {
-            width: min(85vw, 350px);
-            height: min(85vw, 350px);
-            background: rgba(255, 45, 85, 0.1);
-            /* Perfect SVG Heart Mask */
-            -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
-            -webkit-mask-size: contain;
-            mask-size: contain;
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-position: center;
-            mask-position: center;
-            transform: scale(0); /* Pop animation start */
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 50px rgba(255, 45, 85, 0.5);
-        }
-
-        .photo-overlay.active .heart-photo-frame {
-            transform: scale(1); /* Pop animation end */
-        }
-
-        .heart-photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         /* --- Curtain & Restart Screen --- */
@@ -298,12 +254,12 @@
         .curtain {
             width: 50%;
             height: 100%;
-            background: #020005;
-            transition: transform 1.5s cubic-bezier(0.64, 0, 0.78, 0);
+            background: #000;
+            transition: transform 1.2s cubic-bezier(0.64, 0, 0.78, 0);
         }
 
-        .curtain.left { transform: translateX(-100%); border-right: 1px solid rgba(255, 45, 85, 0.2); }
-        .curtain.right { transform: translateX(100%); border-left: 1px solid rgba(255, 45, 85, 0.2); }
+        .curtain.left { transform: translateX(-100%); border-right: 1px solid rgba(255, 45, 85, 0.3); }
+        .curtain.right { transform: translateX(100%); border-left: 1px solid rgba(255, 45, 85, 0.3); }
 
         .curtain-container.active .curtain { transform: translateX(0); }
         .curtain-container.active { pointer-events: auto; cursor: pointer; }
@@ -316,7 +272,8 @@
             text-align: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 1s ease 0.8s; /* Delayed appearance after curtain closes */
+            transition: opacity 1s ease 0.6s;
+            z-index: 310;
         }
 
         .curtain-container.active .restart-content {
@@ -329,19 +286,20 @@
             font-size: 58px;
             color: #ff2d55;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 45, 85, 0.4);
+            text-shadow: 0 0 25px rgba(255, 45, 85, 0.5);
         }
 
         .restart-content p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: pulseText 2s infinite;
         }
 
         @keyframes pulseText {
-            0%, 100% { opacity: 0.5; }
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
     </style>
@@ -365,6 +323,7 @@
     </div>
 
     <canvas id="c"></canvas>
+    <div class="vignette"></div>
 
     <!-- Letter Overlay -->
     <div class="letter-overlay" id="letterOverlay">
@@ -372,13 +331,6 @@
             <div class="letter-header">for you</div>
             <div class="letter-body" id="letterBody"></div>
             <div class="letter-sign" id="letterSign">Yours forever, Rahat</div>
-        </div>
-    </div>
-
-    <!-- Photo Overlay -->
-    <div class="photo-overlay" id="photoOverlay">
-        <div class="heart-photo-frame">
-            <img src="photo.jpg" alt="Our Photo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZjJkNTUiIGZpbGwtb3BhY2l0eT0iMC4zIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwcHgiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5waG90by5qcGc8L3RleHQ+PC9zdmc+'">
         </div>
     </div>
 
@@ -404,8 +356,11 @@
             let CX = W / 2;
             let CY = H / 2;
             let dpr = Math.min(window.devicePixelRatio || 1, 2);
-
             let scale = Math.min(W, H) * 0.22;
+
+            // Load Custom Image
+            const myPhoto = new Image();
+            myPhoto.src = 'photo.jpg';
 
             function resize() {
                 W = window.innerWidth;
@@ -422,76 +377,75 @@
             window.addEventListener('resize', resize);
             resize();
 
-            const NUM_POINTS = 180;
-            let currentRotSpeed = 0.006; // Soft rotation speed
+            const NUM_POINTS = 200; // Increased for denser heart
+            let currentRotSpeed = 0.006; 
+            
+            // Solid, clear font family for particles
+            const FONT_FAMILY = "'Plus Jakarta Sans', sans-serif";
 
+            // Simple, beautiful words
             const WORDS = [
-                'kitty', 'lamu', 'kolija', '❤', 'love', 'boujaan', 'my heart',
-                'forever', 'always', 'you', 'me & you', 'love you', 'sweetheart'
+                'kitty', 'lamu', 'kolija', '❤', 'love', 'boujaan', 
+                'forever', 'always', 'you', 'me', 'love you', 'sweetheart'
             ];
 
             let startTimestamp = null;
             let isIntroFinished = false;
             
-            // Flow Control Flags
+            // Sequence Flags
             let isLetterTriggered = false;
             let isDramaticSpin = false;
-            let isPhotoRevealed = false;
+            let isPhotoRevealing = false;
+            
+            // Image Animation Variables
+            let imgAlpha = 0;
+            let innerHeartScale = 0.5;
 
-            // Loader function
+            // Loader
             function startCardLoader() {
                 const loadingBar = document.getElementById('loadingBar');
                 const statusText = document.getElementById('statusText');
                 const startBtn = document.getElementById('startBtn');
-
-                const duration = 2500;
+                const duration = 2000;
                 const steps = [
-                    { threshold: 20, text: 'Thinking about your smile...' },
+                    { threshold: 30, text: 'Thinking about your smile...' },
                     { threshold: 60, text: 'Gathering all my love...' },
-                    { threshold: 90, text: 'Making it perfect for you...' },
                     { threshold: 100, text: 'Ready 💗' }
                 ];
-
                 let loaderStart = null;
                 function animateLoader(timestamp) {
                     if (!loaderStart) loaderStart = timestamp;
                     const progress = Math.min((timestamp - loaderStart) / duration, 1);
                     const percent = Math.floor(progress * 100);
-
                     loadingBar.style.width = `${percent}%`;
                     const activeStep = steps.find(s => percent <= s.threshold) || steps[steps.length - 1];
                     statusText.textContent = activeStep.text;
 
-                    if (progress < 1) {
-                        requestAnimationFrame(animateLoader);
-                    } else {
-                        startBtn.removeAttribute('disabled');
-                    }
+                    if (progress < 1) requestAnimationFrame(animateLoader);
+                    else startBtn.removeAttribute('disabled');
                 }
                 requestAnimationFrame(animateLoader);
             }
-            setTimeout(startCardLoader, 400);
+            setTimeout(startCardLoader, 300);
 
-            // Start button listener
+            // Start Button
             document.getElementById('startBtn').addEventListener('click', () => {
                 const bgMusic = document.getElementById('bgMusic');
                 bgMusic.play().catch(e => console.log(e));
-
                 document.getElementById('startOverlay').classList.add('fade-out');
                 setTimeout(() => {
                     startTimestamp = performance.now();
                     isIntroFinished = true;
-                }, 800);
+                }, 600);
             });
 
-            // Cinematic Letter Logic
-            const letterText = "Dear Boujaan,\n\nI made this just for you...\n\nEvery single beat you see here is a reminder of how much you mean to me, and how deeply I have fallen for you.\n\nNo matter where life takes us, my heart will always beat only for you, today and forever 💗.";
+            // Letter Logic
+            const letterText = "Dear Boujaan,\n\nI made this just for you...\n\nEvery single word you see here is a reminder of how much you mean to me, and how deeply I have fallen for you.\n\nNo matter where life takes us, my heart will always beat only for you, today and forever 💗.";
 
             function startLetterSequence() {
                 isLetterTriggered = true;
                 const overlay = document.getElementById('letterOverlay');
                 overlay.classList.add('active');
-
                 const body = document.getElementById('letterBody');
                 body.innerHTML = '';
 
@@ -499,59 +453,48 @@
                 function typeChar() {
                     if (charIdx < letterText.length) {
                         const char = letterText[charIdx];
-                        if (char === '\n') {
-                            body.innerHTML += '<br>';
-                        } else {
-                            body.innerHTML += char;
-                        }
+                        if (char === '\n') body.innerHTML += '<br>';
+                        else body.innerHTML += char;
                         charIdx++;
-                        setTimeout(typeChar, 40);
+                        setTimeout(typeChar, 45);
                     } else {
-                        // Finished typing! Show signature
                         document.getElementById('letterSign').classList.add('visible');
-                        
-                        // Wait 3.5 seconds to let them read, then elegantly fade away
+                        // Give 3.5 seconds to read
                         setTimeout(endLetterSequence, 3500);
                     }
                 }
-                setTimeout(typeChar, 600); // Slight delay after popup before typing
+                setTimeout(typeChar, 600);
             }
 
             function endLetterSequence() {
                 const card = document.getElementById('letterCard');
-                // Elegant fade out CSS class
-                card.classList.add('fade-out');
+                card.classList.add('fade-out'); // Moves up and fades beautifully
                 
                 setTimeout(() => {
                     document.getElementById('letterOverlay').classList.remove('active');
-                    // Initiate Heart Spin & Photo Reveal
                     initiatePhotoSequence();
-                }, 800); // wait for fade out
+                }, 1000); 
             }
 
             function initiatePhotoSequence() {
-                // Dramatically spin the heart for 1.2 seconds
+                // Step 1: Dramatic Spin & slight expansion
                 isDramaticSpin = true;
-                currentRotSpeed = 0.08; // Super fast spin
+                currentRotSpeed = 0.04; 
 
+                // Step 2: Fade in Photo INSIDE the heart
                 setTimeout(() => {
-                    isDramaticSpin = false;
-                    isPhotoRevealed = true; // Signals particles to explode outwards
+                    isPhotoRevealing = true;
+                    currentRotSpeed = 0.015; // Slow down a bit so photo is visible clearly
                     
-                    // Show the heart-shaped photo
-                    const photoOverlay = document.getElementById('photoOverlay');
-                    photoOverlay.classList.add('active');
-
-                    // Keep photo for exactly 2 seconds, then close curtains
+                    // Step 3: Wait 2.5 seconds, then close curtain
                     setTimeout(() => {
-                        const curtain = document.getElementById('curtainContainer');
-                        curtain.classList.add('active');
-                    }, 2000);
+                        document.getElementById('curtainContainer').classList.add('active');
+                    }, 2500);
 
-                }, 1200);
+                }, 1000);
             }
 
-            // 3D Math & Particle System
+            // 3D Math for Heart
             function getHeartPoint(t, layer) {
                 const x = Math.pow(Math.sin(t), 3);
                 const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / 16;
@@ -580,17 +523,12 @@
 
                 point.projX = CX + x1 * scale * perspective;
                 point.projY = CY + y2 * scale * perspective;
-                point.projZ = z2;
+                point.projZ = z2; // For sorting
                 point.projScale = perspective;
             }
 
-            function lerp(a, b, t) {
-                return a + (b - a) * t;
-            }
-
-            function easeInOutCubic(t) {
-                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-            }
+            function lerp(a, b, t) { return a + (b - a) * t; }
+            function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
 
             class Particle3D {
                 constructor(index) {
@@ -600,17 +538,16 @@
                     const spanX = W / scale;
                     const spanY = H / scale;
 
-                    // Wide elegant rain start positions
-                    this.rainX = (Math.random() - 0.5) * spanX * 2.0;
-                    this.rainY = -spanY * 1.0 - Math.random() * spanY * 1.5;
+                    // BEAUTIFUL RAIN: Distribute particles across entire screen instantly
+                    this.rainX = (Math.random() - 0.5) * spanX * 2.2;
+                    this.rainY = (Math.random() - 1.2) * spanY * 1.5; 
                     this.rainZ = (Math.random() - 0.5) * 1.5;
 
-                    // Slow drift
-                    this.speedY = Math.random() * 0.015 + 0.01;
+                    this.speedY = Math.random() * 0.02 + 0.015;
                     this.driftOffset = Math.random() * Math.PI * 2;
-                    this.driftSpeed = Math.random() * 1.5 + 0.5;
+                    this.driftSpeed = Math.random() * 1.0 + 0.5;
 
-                    const theta = (index / NUM_POINTS) * Math.PI * 2 * 7;
+                    const theta = (index / NUM_POINTS) * Math.PI * 2 * 11;
                     const layer = (index / NUM_POINTS) * 2 - 1;
                     const hp = getHeartPoint(theta, layer);
 
@@ -623,39 +560,27 @@
                     this.z = this.rainZ;
 
                     this.trail = [];
-                    this.maxTrail = 6; // slightly longer trail for rain
+                    this.maxTrail = 5;
 
-                    // Smooth random delay for assemble
                     this.assembleDelay = Math.random() * 0.6;
-                    this.fontSize = Math.random() < 0.25 ? 15 : (Math.random() < 0.7 ? 12 : 10);
+                    // Slightly larger font size for normal text clarity
+                    this.fontSize = Math.random() < 0.3 ? 16 : (Math.random() < 0.7 ? 13 : 11);
                     this.weight = '600';
-                    this.opacity = Math.random() * 0.4 + 0.6;
+                    this.opacity = Math.random() * 0.4 + 0.6; // Very visible
                     this.noiseOffset = Math.random() * 100;
                 }
 
                 update(phase, progress, rotY, rotX, beatFactor, time) {
                     const spanY = H / scale;
 
-                    if (isPhotoRevealed) {
-                        // Explode words outward and fade them
-                        this.targetX *= 1.08;
-                        this.targetY *= 1.08;
-                        this.targetZ *= 1.08;
-                        this.opacity *= 0.85; // Quick fade
-                        
-                        this.x = this.targetX;
-                        this.y = this.targetY;
-                        this.z = this.targetZ;
-
-                    } else if (phase === 'rain') {
+                    if (phase === 'rain') {
                         this.rainY += this.speedY;
-                        // Elegant horizontal swaying
                         const sway = Math.sin(time * this.driftSpeed + this.driftOffset) * 0.01;
                         this.rainX += sway;
 
-                        if (this.rainY > spanY * 0.7) {
+                        if (this.rainY > spanY * 0.8) {
                             this.rainY = -spanY * 0.8;
-                            this.rainX = (Math.random() - 0.5) * spanX * 2.0;
+                            this.rainX = (Math.random() - 0.5) * spanX * 2.2;
                         }
                         this.x = this.rainX;
                         this.y = this.rainY;
@@ -669,8 +594,7 @@
                         this.y = lerp(this.rainY, this.targetY * beatFactor, t);
                         this.z = lerp(this.rainZ, this.targetZ * beatFactor, t);
                     } else if (phase === 'beating') {
-                        // Very slow romantic beating wave
-                        const wave = Math.sin(time * 1.5 + this.noiseOffset) * 0.012;
+                        const wave = Math.sin(time * 1.5 + this.noiseOffset) * 0.01;
                         this.x = (this.targetX + wave) * beatFactor;
                         this.y = (this.targetY + wave) * beatFactor;
                         this.z = (this.targetZ + wave) * beatFactor;
@@ -678,8 +602,7 @@
 
                     project3D(this, rotY, rotX);
 
-                    // Add trail only if not beating and not exploded
-                    if (phase !== 'beating' && !isPhotoRevealed) {
+                    if (phase !== 'beating' && !isPhotoRevealing) {
                         this.trail.push({ x: this.projX, y: this.projY });
                         if (this.trail.length > this.maxTrail) this.trail.shift();
                     } else {
@@ -696,10 +619,82 @@
             let rotY = 0;
             let rotX = 0.2;
 
-            // Timings for visual phases
-            const RAIN_DURATION = 4500; 
-            const ASSEMBLE_DURATION = 3500;
-            const BEAT_BEFORE_LETTER = 3000; // Heart beats for 3 sec before auto-opening letter
+            // Phase Timings
+            const RAIN_DURATION = 4000; 
+            const ASSEMBLE_DURATION = 3000;
+            const BEAT_BEFORE_LETTER = 3000; 
+
+            // Function to clip a perfect heart shape on canvas
+            function createHeartPath(context, customScale) {
+                context.beginPath();
+                for (let t = 0; t <= Math.PI * 2; t += 0.05) {
+                    const x = Math.pow(Math.sin(t), 3) * 1.5;
+                    const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) / 16 * 1.5 - 0.08;
+                    const px = x * customScale;
+                    const py = y * customScale;
+                    if (t === 0) context.moveTo(px, py);
+                    else context.lineTo(px, py);
+                }
+                context.closePath();
+            }
+
+            // Function to draw image imitating "object-fit: cover"
+            function drawImageCover(ctx, img, w, h) {
+                const imgRatio = img.width / img.height;
+                const targetRatio = w / h;
+                let drawW, drawH;
+                if (imgRatio > targetRatio) {
+                    drawH = h; drawW = h * imgRatio;
+                } else {
+                    drawW = w; drawH = w / imgRatio;
+                }
+                ctx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
+            }
+
+            function renderParticles(particles, phase) {
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    const zNorm = (p.projZ + 0.8) / 1.6;
+
+                    if (phase === 'beating' && zNorm > 0.6 && !isDramaticSpin) continue;
+
+                    // Trails during rain
+                    if (phase !== 'beating' && p.trail.length > 1 && !isPhotoRevealing) {
+                        for (let j = 0; j < p.trail.length - 1; j++) {
+                            const trailPos = p.trail[j];
+                            const trailAlpha = (p.opacity * (j / p.trail.length) * 0.35).toFixed(2);
+                            ctx.font = `${p.weight} ${Math.max(6, Math.round(p.fontSize * 0.7 * p.projScale))}px ${FONT_FAMILY}`;
+                            ctx.fillStyle = phase === 'rain' ? `rgba(255, 120, 160, ${trailAlpha})` : `rgba(255, 45, 85, ${trailAlpha})`;
+                            ctx.fillText(p.text, trailPos.x, trailPos.y);
+                        }
+                    }
+
+                    const fSize = Math.max(8, Math.round(p.fontSize * p.projScale));
+                    ctx.font = `${p.weight} ${fSize}px ${FONT_FAMILY}`;
+
+                    let r = 255, g = 45, b = 85;
+                    if (phase === 'rain') {
+                        g = 130; b = 170; // Soft pink/white
+                    } else {
+                        if (zNorm < 0.5) {
+                            const t = zNorm * 2;
+                            g = Math.round(45 + t * 45); b = Math.round(85 + t * 45);
+                        } else {
+                            const t = (zNorm - 0.5) * 2;
+                            r = Math.round(255 - t * 80); g = Math.round(90 - t * 40); b = Math.round(130 + t * 100);
+                        }
+                    }
+
+                    let alpha = p.opacity * Math.max(0.3, (1.2 - zNorm));
+                    if (phase === 'beating' && zNorm > 0.45 && !isDramaticSpin) alpha *= (0.55 - zNorm) / 0.1;
+                    
+                    // Slightly fade text when photo is revealing so photo pops out
+                    if (isPhotoRevealing) alpha *= 0.7;
+
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
+                    ctx.fillText(p.text, p.projX, p.projY);
+                }
+            }
 
             function loop(now) {
                 if (!isIntroFinished) {
@@ -724,93 +719,75 @@
                     phase = 'beating';
                     progress = 1.0;
 
-                    // Trigger letter automatically after 3s of beating
                     if (!isLetterTriggered && elapsed > (RAIN_DURATION + ASSEMBLE_DURATION + BEAT_BEFORE_LETTER)) {
                         startLetterSequence();
                     }
                 }
 
                 let beatFactor = 1.0;
-                // Only beat normally if we are not spinning or revealing photo
-                if (phase === 'beating' && !isDramaticSpin && !isPhotoRevealed) {
-                    const beatCycle = 1800; // soft and slow beat
+                if (phase === 'beating' && !isDramaticSpin && !isPhotoRevealing) {
+                    const beatCycle = 1800; 
                     const cycleProgress = (elapsed - (RAIN_DURATION + ASSEMBLE_DURATION)) % beatCycle;
-
                     if (cycleProgress < 150) {
-                        const t = cycleProgress / 150;
-                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.1;
+                        beatFactor = 1.0 + Math.sin((cycleProgress / 150) * Math.PI) * 0.1;
                     } else if (cycleProgress >= 280 && cycleProgress < 430) {
-                        const t = (cycleProgress - 280) / 150;
-                        beatFactor = 1.0 + Math.sin(t * Math.PI) * 0.07;
+                        beatFactor = 1.0 + Math.sin(((cycleProgress - 280) / 150) * Math.PI) * 0.06;
                     }
                 } else if (isDramaticSpin) {
-                    beatFactor = 1.1; // Slightly enlarge heart while spinning
+                    beatFactor = 1.15; // Heart expands slightly when spinning fast
                 }
 
-                // Update rotations
                 rotY += currentRotSpeed; 
-                // Gentle tilt if not spinning fast
-                if(!isDramaticSpin) {
-                    rotX = 0.25 + Math.sin(time * 0.5) * 0.08; 
-                }
+                if(!isDramaticSpin) rotX = 0.25 + Math.sin(time * 0.5) * 0.08; 
 
                 for (let i = 0; i < NUM_POINTS; i++) {
                     heartParticles[i].update(phase, progress, rotY, rotX, beatFactor, time);
                 }
 
-                heartParticles.sort((a, b) => a.projZ - b.projZ);
+                // Sort particles back-to-front (Z > 0 is farther away)
+                heartParticles.sort((a, b) => b.projZ - a.projZ);
+                
+                // Split particles to draw image in the middle
+                const backParticles = heartParticles.filter(p => p.projZ > 0);
+                const frontParticles = heartParticles.filter(p => p.projZ <= 0);
+
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
 
-                for (let i = 0; i < NUM_POINTS; i++) {
-                    const p = heartParticles[i];
-                    if(p.opacity <= 0.01) continue; // Skip rendering if faded out completely
+                // 1. Draw back words
+                renderParticles(backParticles, phase);
 
-                    const zNorm = (p.projZ + 0.8) / 1.6;
+                // 2. Draw Image Inside Heart (If revealing)
+                if (isPhotoRevealing && myPhoto.complete && myPhoto.naturalWidth > 0) {
+                    imgAlpha = Math.min(1.0, imgAlpha + 0.02); // Smooth fade in
+                    innerHeartScale = lerp(innerHeartScale, 0.95, 0.05); // Smooth pop up
 
-                    // Hide back particles slightly during normal beating for depth
-                    if (phase === 'beating' && zNorm > 0.6 && !isDramaticSpin) continue;
+                    ctx.save();
+                    ctx.translate(CX, CY);
+                    
+                    // Create perfect heart mask matching the 3D shape
+                    createHeartPath(ctx, scale * beatFactor * innerHeartScale);
+                    ctx.clip();
+                    
+                    ctx.globalAlpha = imgAlpha;
+                    const boxSize = scale * 3.5; // Ensure it covers the mask
+                    drawImageCover(ctx, myPhoto, boxSize, boxSize);
+                    
+                    // Inner shadow for depth
+                    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                    ctx.shadowBlur = 30;
+                    ctx.strokeStyle = 'rgba(255, 45, 85, 0.5)';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
 
-                    // Draw Trails (mostly during rain)
-                    if (phase !== 'beating' && p.trail.length > 1 && !isPhotoRevealed) {
-                        for (let j = 0; j < p.trail.length - 1; j++) {
-                            const trailPos = p.trail[j];
-                            const trailAlpha = (p.opacity * (j / p.trail.length) * 0.35).toFixed(2);
-                            ctx.font = `${p.weight} ${Math.max(5, Math.round(p.fontSize * 0.7 * p.projScale))}px 'Plus Jakarta Sans', sans-serif`;
-                            // Softer trail colors for rain
-                            ctx.fillStyle = phase === 'rain' ? `rgba(255, 107, 157, ${trailAlpha})` : `rgba(255, 45, 85, ${trailAlpha})`;
-                            ctx.fillText(p.text, trailPos.x, trailPos.y);
-                        }
-                    }
-
-                    // Draw Main Word
-                    const fSize = Math.max(7, Math.round(p.fontSize * p.projScale));
-                    ctx.font = `${p.weight} ${fSize}px 'Plus Jakarta Sans', sans-serif`;
-
-                    let r = 255, g = 45, b = 85;
-                    if (phase === 'rain') {
-                        // Softer pink/whiteish for rain petals
-                        g = 120; b = 170;
-                    } else {
-                        if (zNorm < 0.5) {
-                            const t = zNorm * 2;
-                            g = Math.round(45 + t * 45); b = Math.round(85 + t * 45);
-                        } else {
-                            const t = (zNorm - 0.5) * 2;
-                            r = Math.round(255 - t * 80); g = Math.round(90 - t * 40); b = Math.round(130 + t * 100);
-                        }
-                    }
-
-                    let alpha = p.opacity * Math.max(0.2, (1.2 - zNorm));
-                    if (phase === 'beating' && zNorm > 0.45 && !isDramaticSpin) alpha *= (0.55 - zNorm) / 0.1;
-
-                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha.toFixed(2)})`;
-                    ctx.fillText(p.text, p.projX, p.projY);
+                    ctx.restore();
                 }
+
+                // 3. Draw front words (They will fly OVER the photo!)
+                renderParticles(frontParticles, phase);
 
                 requestAnimationFrame(loop);
             }
-
             requestAnimationFrame(loop);
         })();
     </script>
